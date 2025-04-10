@@ -1,0 +1,119 @@
+import random
+
+def zavdannya1():
+    print("\n--- Завдання 1: Банківський депозит ---")
+    suma = float(input("Введіть початкову суму вкладу: "))
+    stavka = float(input("Введіть річну процентну ставку (%): "))
+    bajana_suma = float(input("Введіть бажану кінцеву суму: "))
+    rik = 0
+
+    while suma < bajana_suma:
+        rik += 1
+        suma += suma * (stavka / 100)
+        print(f"Рік {rik}: сума = {round(suma, 2)} грн")
+
+    print(f"Потрібно {rik} років, щоб накопичити бажану суму.\n")
+
+def zavdannya2():
+    print("\n--- Завдання 2: Гра «Вгадай число» ---")
+    chyslo = random.randint(1, 100)
+    vdgadano = False
+
+    for sproba in range(1, 8):
+        vhid = int(input(f"Спроба {sproba}/7. Введіть число: "))
+        if vhid == chyslo:
+            print(f"Вітаємо! Ви вгадали число за {sproba} спроб(у/и).\n")
+            vdgadano = True
+            break
+        elif vhid < chyslo:
+            print("Загадане число більше.")
+        else:
+            print("Загадане число менше.")
+
+    if not vdgadano:
+        print(f"Ви не вгадали. Загадане число було: {chyslo}\n")
+
+def zavdannya3():
+    print("\n--- Завдання 3: Прості числа у діапазоні ---")
+    start = int(input("Введіть нижню межу: "))
+    end = int(input("Введіть верхню межу: "))
+    found = False
+
+    print("Прості числа:")
+    for num in range(start, end + 1):
+        if num > 1:
+            is_prime = True
+            for d in range(2, int(num**0.5) + 1):
+                if num % d == 0:
+                    is_prime = False
+                    break
+            if is_prime:
+                print(num)
+                found = True
+
+    if not found:
+        print("У цьому діапазоні немає простих чисел.\n")
+
+def zavdannya4():
+    print("\n--- Завдання 4: Факторіал з перевіркою ---")
+    while True:
+        try:
+            n = int(input("Введіть ціле число ≥ 0: "))
+            if n >= 0:
+                break
+            else:
+                print("Число повинно бути невід’ємним!")
+        except ValueError:
+            print("Введіть саме ціле число!")
+
+    factorial = 1
+    output = "1"
+    i = 2
+    while i <= n:
+        factorial *= i
+        output += f"*{i}"
+        i += 1
+
+    print(f"{n}! = {output} = {factorial}\n")
+
+def zavdannya5():
+    print("\n--- Завдання 5: Ріст популяції бактерій ---")
+    populyaciya = 10
+    vidsotok = float(input("Введіть процент росту за годину (наприклад, 20): "))
+    maksimum = int(input("Введіть максимальну кількість бактерій: "))
+    godyny = 0
+
+    while populyaciya < maksimum:
+        godyny += 1
+        populyaciya += populyaciya * (vidsotok / 100)
+        print(f"Година {godyny}: {int(populyaciya)} бактерій")
+
+    print(f"Популяція перевищила межу за {godyny} годин(у/и).\n")
+
+while True:
+    print("""
+=== Практична робота №7 ===
+1. Банківський депозит
+2. Гра "Вгадай число"
+3. Прості числа у діапазоні
+4. Обчислення факторіала
+5. Ріст популяції бактерій
+0. Вихід
+""")
+    vibor = input("Оберіть номер завдання: ")
+
+    if vibor == "1":
+        zavdannya1()
+    elif vibor == "2":
+        zavdannya2()
+    elif vibor == "3":
+        zavdannya3()
+    elif vibor == "4":
+        zavdannya4()
+    elif vibor == "5":
+        zavdannya5()
+    elif vibor == "0":
+        print("До побачення!")
+        break
+    else:
+        print("Невірний вибір. Спробуйте ще раз.\n")
